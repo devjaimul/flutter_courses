@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 void main() {
   runApp(MyApp());
@@ -20,37 +22,40 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //ai 2 vabei kaj kora jay
 
-    // old
-    print(MediaQuery.of(context).displayFeatures);
-
-    //new
-    print(MediaQuery.displayFeaturesOf(context));
-
-    print(MediaQuery.sizeOf(context));
-    print(MediaQuery.sizeOf(context).width);
-    print(MediaQuery.sizeOf(context).height);
-    print(MediaQuery.orientationOf(context));
-    print(MediaQuery.devicePixelRatioOf(context));
 
     return Scaffold(
-      body: OrientationBuilder(builder: (context, orientation) {
-        if(orientation==Orientation.portrait){
-          return Container(
-            height: double.infinity,
-            width: double.infinity,
-            color: Colors.teal,
-          );
-        }
-        else {
-          return Container(
-            height: double.infinity,
-            width: double.infinity,
-            color: Colors.blue.shade300,
-          );
-        }
-      },),
+      body: Column(
+        children: [
+
+          /*
+          *  //flexible
+
+          // Flexible(fit: FlexFit.tight,flex: 2, child: Container(height: 100,width: 100,color: Colors.teal,)),
+          // Flexible(fit: FlexFit.tight, child: Container(height: 100,width: 100,color: Colors.yellow,)),
+          // Flexible(fit: FlexFit.tight, child: Container(height: 100,width: 100,color: Colors.blue,)),
+
+          //expanded
+          Expanded(flex:3, child: Container(height: 100,width: 100,color: Colors.teal,)),
+          Expanded(flex:1, child: Container(height: 100,width: 100,color: Colors.yellow,)),
+          Expanded(flex:2, child: Container(height: 100,width: 100,color: Colors.blue,)),
+
+*/
+
+          SizedBox(
+            height: 500,
+            width: MediaQuery.sizeOf(context).width,
+            child: FractionallySizedBox(
+              heightFactor: 0.3,
+              widthFactor: 0.9,
+              child: Container(
+                color: Colors.teal,
+              ),
+            ),
+          ),
+          AspectRatio(aspectRatio:16/12 ,child: Container(color: Colors.deepOrange,),)
+        ],
+      ),
     );
   }
 }
