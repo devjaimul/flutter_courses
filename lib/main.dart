@@ -29,7 +29,7 @@ class Home extends StatelessWidget {
         children: [
 
           /*
-          *  //flexible
+          *  //flexiblee
 
           // Flexible(fit: FlexFit.tight,flex: 2, child: Container(height: 100,width: 100,color: Colors.teal,)),
           // Flexible(fit: FlexFit.tight, child: Container(height: 100,width: 100,color: Colors.yellow,)),
