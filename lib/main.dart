@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:responsive_builder/responsive_builder.dart';
+import 'package:device_preview/device_preview.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(DevicePreview(
+    enabled: true,
+    builder: (context) => MyApp(), // Wrap your app
+  ),);
 }
 
 class MyApp extends StatelessWidget {
@@ -9,8 +14,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Home(),
+    return   MaterialApp(
+      useInheritedMediaQuery: true,
+      locale: DevicePreview.locale(context),
+      builder: DevicePreview.appBuilder,
+      home: const Home(),
     );
   }
 }
@@ -21,7 +29,29 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
 body: Column(
-  children: [],
+  children: [
+    
+  //   ResponsiveBuilder(
+  //   builder: (context, sizingInformation) {
+  //       // Check the sizing information here and return your UI
+  //       if (sizingInformation.deviceScreenType == DeviceScreenType.desktop) {
+  //     return Container(color:Colors.bluee);
+  //   }
+  //
+  //   if (sizingInformation.deviceScreenType == DeviceScreenType.tablet) {
+  //     return Container(color:Colors.red);
+  //   }
+  //
+  //   if (sizingInformation.deviceScreenType == DeviceScreenType.watch) {
+  //     return Container(color:Colors.yellow);
+  //   }
+  //
+  //   return Container(color:Colors.purple);
+  // },
+  //
+  // )
+
+  ],
 ),
     );
   }
