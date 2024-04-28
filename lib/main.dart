@@ -35,7 +35,7 @@ body: Column(
   //   builder: (context, sizingInformation) {
   //       // Check the sizing information here and return your UI
   //       if (sizingInformation.deviceScreenType == DeviceScreenType.desktop) {
-  //     return Container(color:Colors.bluee);
+  //     return Container(color:Colors.blue);
   //   }
   //
   //   if (sizingInformation.deviceScreenType == DeviceScreenType.tablet) {
