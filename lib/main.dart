@@ -1,94 +1,135 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
+  State<MyApp> createState() => _MyAppState();
+}
 
-      initialRoute: 'home',
-     routes:
-     {
-       'home':(context) => Home(),
-       'profile':(context) => Profile(),
-       'setting':(context) => Setting(),
-     },
-    );
+class _MyAppState extends State<MyApp> {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(initialRoute: '/', onGenerateRoute: _generateRoute);
+  }
+
+  MaterialPageRoute? _generateRoute(RouteSettings settings) {
+    Widget? widget;
+    switch (settings.name) {
+      case HomeScreen.routeName:
+        widget = const HomeScreen();
+        break;
+      case SettingsScreen.routeName:
+        widget = const SettingsScreen();
+        break;
+      case ProfileScreen.routeName:
+        String userName = settings.arguments as String;
+        widget = ProfileScreen(userName: userName);
+        break;
+    }
+
+    if (widget != null) {
+      return MaterialPageRoute(builder: (context) => widget!);
+    }
+    return null;
   }
 }
 
-class Home extends StatelessWidget {
-  const Home({super.key});
+class HomeScreen extends StatelessWidget {
+  static const String routeName = '/';
+
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('home '),
+        title: const Text('Home'),
       ),
-      backgroundColor: Colors.blue.shade200,
       body: Center(
         child: Column(
           children: [
-            ElevatedButton(onPressed: () {
-            Navigator.pushReplacementNamed(context, 'profile');
-            }, child: Text('profile')),
-            ElevatedButton(onPressed: () {Navigator.pushNamed(context, 'setting');}, child: Text('setting')),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, SettingsScreen.routeName);
+              },
+              child: const Text('Settings'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushReplacementNamed(context, ProfileScreen.routeName,
+                    arguments: 'Rafat J');
+              },
+              child: const Text('Profile'),
+            ),
           ],
         ),
       ),
     );
   }
 }
-class Profile extends StatelessWidget {
 
-  const Profile({super.key});
+class ProfileScreen extends StatelessWidget {
+  static const String routeName = '/profile';
 
+  const ProfileScreen({super.key, required this.userName});
+
+  final String userName;
 
   @override
   Widget build(BuildContext context) {
-
+    print(userName);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Profile'),
+        title: const Text('Profile'),
       ),
-      backgroundColor: Colors.teal.shade200,
       body: Center(
         child: Column(
           children: [
-            ElevatedButton(onPressed: () {
-              Navigator.pushNamedAndRemoveUntil(context, 'home', (route) => false);
-            }, child: Text('home')),
-            ElevatedButton(onPressed: () {
-              Navigator.pushReplacementNamed(context, 'setting',arguments: {"name":'Akik'});
-            }, child: Text('setting')),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamedAndRemoveUntil(
+                    context, '/', (route) => false);
+              },
+              child: const Text('Home'),
+            ),
+            ElevatedButton(
+              onPressed: () {},
+              child: const Text('Settings'),
+            ),
           ],
         ),
       ),
     );
   }
 }
-class Setting extends StatelessWidget {
-  const Setting({super.key});
+
+class SettingsScreen extends StatelessWidget {
+  static const String routeName = '/settings';
+
+  const SettingsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final args= ModalRoute.of(context)?.profile.arguments as Map<String,String>;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Setting'),
+        title: const Text('Settings'),
       ),
-      backgroundColor: Colors.red.shade200,
       body: Center(
         child: Column(
           children: [
-            ElevatedButton(onPressed: () {Navigator.pushNamedAndRemoveUntil(context, 'home', (route) => false);}, child: Text('home')),
-            ElevatedButton(onPressed: () {Navigator.pushNamed(context, 'profile');}, child: Text('profile')),
+            ElevatedButton(
+              onPressed: () {},
+              child: const Text('Profile'),
+            ),
+            ElevatedButton(
+              onPressed: () {},
+              child: const Text('Home'),
+            ),
           ],
         ),
       ),
