@@ -5,7 +5,7 @@ import 'package:device_preview/device_preview.dart';
 void main() {
   runApp(DevicePreview(
     enabled: true,
-    builder: (context) => MyApp(), // Wrap your app
+    builder: (context) => const MyApp(), // Wrap your app
   ),);
 }
 
@@ -27,7 +27,7 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
 body: Column(
   children: [
     
